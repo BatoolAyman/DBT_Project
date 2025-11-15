@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: int_air_quality_combined
+    description: "Unified dataset combining Egypt AQ + NASA AQ"
