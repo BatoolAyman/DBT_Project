@@ -5,33 +5,34 @@ with egypt_raw as (
 
 egypt as (
     select
-        city,
-        latitude,
-        longitude,
-        date as date_utc,
-        col as parameter,
-        value
+        CITY,
+        LATITUDE,
+        LONGITUDE,
+        DATE as DATE_UTC,
+        col as PARAMETER,
+        VALUE
     from egypt_raw
     unpivot (
-        value for col in (CO, NO, NO2, O3, SO2, PM2_5, PM10, NH3)
+        VALUE for col in (CO, NO, NO2, O3, SO2, PM2_5, PM10, NH3)
     )
 ),
 
 nasa as (
     select
-        null as city,
-        lat as latitude,
-        lon as longitude,
-        'AOD' as parameter,
-        aod as value,
-        timestamp as date_utc
+        null as CITY,
+        lat as LATITUDE,
+        lon as LONGITUDE,
+        'AOD' as PARAMETER,
+        aod as VALUE,
+        timestamp as DATE_UTC
     from AIR_QUALITY_DB.EGYPT_DATA_STAGING.STG_NASA_AIR_QUALITY
 ),
 
+
 combined as (
-    select city, latitude, longitude, parameter, value, date_utc, 'n/a' as unit from egypt
+    select CITY, LATITUDE, LONGITUDE, PARAMETER, VALUE, DATE_UTC, 'n/a' as UNIT from egypt
     union all
-    select city, latitude, longitude, parameter, value, date_utc, 'n/a' as unit from nasa
+    select CITY, LATITUDE, LONGITUDE, PARAMETER, VALUE, DATE_UTC, 'n/a' as UNIT from nasa
 )
 
 select *
