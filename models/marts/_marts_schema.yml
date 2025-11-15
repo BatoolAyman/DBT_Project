@@ -1,0 +1,7 @@
+version: 2
+
+models:
+  - name: dim_location
+  - name: dim_date
+  - name: dim_pollutant
+  - name: fact_air_quality

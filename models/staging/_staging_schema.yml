@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: stg_egypt_air_quality
+    description: "Cleaned staging layer for Egypt AQ"
+    columns:
+      - name: city
+      - name: latitude
+      - name: longitude
+      - name: parameter
+      - name: value
+      - name: unit
+      - name: date_utc
+
+  - name: stg_nasa_air_quality
+    description: "Cleaned staging layer for NASA AQ"
+    columns:
+      - name: lat
+      - name: lon
+      - name: aod
+      - name: timestamp
