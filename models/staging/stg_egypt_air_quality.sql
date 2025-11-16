@@ -3,19 +3,41 @@ with raw as (
     from {{ source('air_quality_source', 'AIR_QUALITY') }}
 ),
 
-unpivoted as (
+cleaned as (
     select
+        -- Location
         city,
+        region,
         latitude,
         longitude,
-        date as date_utc,
-        col as parameter,
-        value
+        
+        -- Temporal
+        timestamp,
+        date(timestamp) as date_utc,
+        hour(timestamp) as hour,
+        dayname(timestamp) as day_of_week,
+        
+        -- Air Quality Index
+        aqi,
+        
+        -- Pollutants (keep them as columns!)
+        co,
+        no,
+        no2,
+        o3,
+        so2,
+        pm2_5,
+        pm10,
+        nh3,
+        
+        -- Metadata
+        data_source,
+        data_type,
+        aqi_category
+        
     from raw
-    unpivot (
-        value for col in (CO, NO, NO2, O3, SO2, PM2_5, PM10, NH3)
-    )
+    where timestamp is not null
+        and aqi is not null
 )
 
-select *
-from unpivoted
+select * from cleaned
