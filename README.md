@@ -1,3 +1,5 @@
+# Data Exploration and Visualization (ITI_DE_Project)
+
 Welcome to your new dbt project!
 
 ### Using the starter project
